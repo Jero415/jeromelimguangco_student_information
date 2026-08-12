@@ -1,4 +1,4 @@
-#!/usr/bin/env php
+php lava run#!/usr/bin/env php
 <?php
 
 (PHP_SAPI !== 'cli' || isset($_SERVER['HTTP_USER_AGENT'])) && die('CLI only');
