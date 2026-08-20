@@ -1,304 +1,726 @@
+<?php
+
+$student_id  = $student_id ?? '';
+$name        = $name ?? '';
+$course      = $course ?? '';
+$year        = $year ?? '';
+$section     = $section ?? '';
+$email       = $email ?? '';
+$contact     = $contact ?? '';
+$address     = $address ?? '';
+$skills      = $skills ?? '';
+$hobbies     = $hobbies ?? '';
+$description = $description ?? '';
+$facebook    = $facebook ?? '';
+$github      = $github ?? '';
+
+?>
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Zean's Digital Student Profile</title>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title><?= htmlspecialchars($name) ?> | Student Profile</title>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
 
         body {
             margin: 0;
+
             font-family: Arial, sans-serif;
-            background: #f3f6ff;
-            color: #334155;
+
+            background: #0b1120;
+
+            color: #e5e7eb;
         }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
 
         .navbar {
-            background: #ffffff;
-            padding: 18px;
-            text-align: center;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            height: 70px;
+
+            padding: 0 7%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            background: #111827;
+
+            border-bottom: 1px solid #1f2937;
         }
 
-        .navbar a {
-            color: #64748b;
-            text-decoration: none;
-            margin: 0 15px;
+        .logo {
+            font-size: 20px;
+
             font-weight: bold;
-            transition: 0.3s;
+
+            color: #22d3ee;
+
+            letter-spacing: 1px;
         }
 
-        .navbar a:hover {
-            color: #6366f1;
+        .nav-links {
+            display: flex;
+
+            gap: 25px;
         }
 
-        .profile {
-            width: 90%;
-            max-width: 750px;
+        .nav-links a {
+            color: #9ca3af;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #22d3ee;
+        }
+
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
+
+        .container {
+            width: 86%;
+
+            max-width: 1050px;
+
             margin: 50px auto;
         }
 
-        .header-card {
-            background: linear-gradient(135deg, #dbeafe, #ede9fe);
+
+        /* =========================
+           PROFILE HEADER
+        ========================= */
+
+        .profile-header {
+            background: #111827;
+
             padding: 40px;
-            text-align: center;
-            border-radius: 24px;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.10);
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 30px;
+
+            border-left: 4px solid #22d3ee;
+
+            margin-bottom: 25px;
         }
+
+
+        /* AVATAR */
 
         .avatar {
-            width: 90px;
-            height: 90px;
-            margin: auto;
-            border-radius: 50%;
-            background: #6366f1;
-            color: white;
+            width: 110px;
+
+            height: 110px;
+
+            flex-shrink: 0;
+
+            background: #22d3ee;
+
+            color: #083344;
+
             display: flex;
+
             align-items: center;
+
             justify-content: center;
-            font-size: 32px;
+
+            font-size: 34px;
+
             font-weight: bold;
+
+            clip-path: polygon(
+                12% 0,
+                88% 0,
+                100% 12%,
+                100% 88%,
+                88% 100%,
+                12% 100%,
+                0 88%,
+                0 12%
+            );
         }
 
-        h1 {
-            margin-bottom: 8px;
-            color: #4338ca;
+
+        .profile-header h1 {
+            margin: 0;
+
+            font-size: 36px;
+
+            color: white;
         }
 
-        .subtitle {
-            color: #64748b;
+        .profile-label {
+            margin-top: 10px;
+
+            color: #22d3ee;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            letter-spacing: 2px;
         }
 
-        .card {
-            background: white;
-            padding: 25px;
-            border-radius: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
-            transition: 0.3s;
-        }
 
-        .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.10);
-        }
+        /* =========================
+           INFORMATION GRID
+        ========================= */
 
-        .card h2 {
-            margin-top: 0;
-            color: #4f46e5;
-            font-size: 21px;
-        }
+        .information {
+            display: grid;
 
-        .info {
-            display: flex;
-            justify-content: space-between;
+            grid-template-columns: 1fr 1fr;
+
             gap: 20px;
-            padding: 13px 0;
-            border-bottom: 1px solid #eef2f7;
         }
 
-        .info:last-child {
-            border-bottom: none;
+
+        /* =========================
+           SECTIONS
+        ========================= */
+
+        .section {
+            background: #111827;
+
+            padding: 28px;
+
+            border: 1px solid #1f2937;
+
+            transition: 0.25s;
         }
 
-        .label {
+        .section:hover {
+            border-color: #22d3ee;
+
+            transform: translateY(-3px);
+        }
+
+        .section h2 {
+            margin: 0 0 20px;
+
+            padding-bottom: 12px;
+
+            border-bottom: 1px solid #1f2937;
+
+            color: #22d3ee;
+
+            font-size: 18px;
+        }
+
+
+        /* =========================
+           INFORMATION ITEMS
+        ========================= */
+
+        .item {
+            margin-bottom: 18px;
+        }
+
+        .item:last-child {
+            margin-bottom: 0;
+        }
+
+        .item label {
+            display: block;
+
+            margin-bottom: 6px;
+
+            color: #6b7280;
+
+            font-size: 11px;
+
             font-weight: bold;
-            color: #475569;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
         }
 
-        .value {
-            text-align: right;
-            color: #64748b;
+        .item span {
+            color: #e5e7eb;
+
+            font-size: 15px;
         }
+
+
+        /* =========================
+           ABOUT
+        ========================= */
 
         .about {
-            line-height: 1.7;
-            color: #64748b;
-            margin-bottom: 15px;
+            grid-column: span 2;
         }
 
-        .social-links {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
+        .about p {
+            color: #9ca3af;
+
+            line-height: 1.8;
+
+            margin: 0 0 22px;
         }
 
-        .social-links a {
+
+        /* =========================
+           TAGS
+        ========================= */
+
+        .tag {
             display: inline-block;
-            padding: 12px 20px;
-            background: #eef2ff;
-            color: #4f46e5;
-            text-decoration: none;
-            border-radius: 12px;
+
+            padding: 9px 14px;
+
+            margin: 4px 4px 4px 0;
+
+            background: #164e63;
+
+            border: 1px solid #155e75;
+
+            color: #a5f3fc;
+
+            font-size: 13px;
+
             font-weight: bold;
-            transition: 0.3s;
         }
 
-        .social-links a:hover {
-            background: #6366f1;
-            color: white;
-            transform: translateY(-2px);
+
+        /* =========================
+           SOCIAL LINKS
+        ========================= */
+
+        .social {
+            grid-column: span 2;
+
+            display: flex;
+
+            gap: 12px;
         }
 
-        .back-button {
-            display: block;
-            width: fit-content;
-            margin: 30px auto 0;
-            padding: 12px 22px;
-            background: #6366f1;
-            color: white;
+        .social a {
+            padding: 13px 22px;
+
+            background: #22d3ee;
+
+            color: #083344;
+
             text-decoration: none;
-            border-radius: 12px;
-            transition: 0.3s;
+
+            font-weight: bold;
+
+            transition: 0.2s;
         }
 
-        .back-button:hover {
-            background: #4f46e5;
-            transform: translateY(-2px);
+        .social a:hover {
+            background: #67e8f9;
+
+            transform: translateX(4px);
         }
 
-        @media (max-width: 600px) {
-            .info {
+
+        /* =========================
+           BACK BUTTON
+        ========================= */
+
+        .back {
+            display: inline-block;
+
+            margin-top: 25px;
+
+            padding: 12px 20px;
+
+            border: 1px solid #1f2937;
+
+            color: #22d3ee;
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            transition: 0.2s;
+        }
+
+        .back:hover {
+            background: #111827;
+
+            border-color: #22d3ee;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        .footer {
+            text-align: center;
+
+            padding: 35px;
+
+            color: #4b5563;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 750px) {
+
+            .profile-header {
                 flex-direction: column;
-                gap: 5px;
+
+                text-align: center;
+
+                padding: 35px 25px;
             }
 
-            .value {
-                text-align: left;
+            .information {
+                grid-template-columns: 1fr;
             }
 
-            .profile {
-                width: 94%;
+            .about,
+            .social {
+                grid-column: span 1;
             }
+
+            .container {
+                width: 92%;
+
+                margin: 35px auto;
+            }
+
+            .profile-header h1 {
+                font-size: 30px;
+            }
+
         }
+
+
+        @media (max-width: 500px) {
+
+            .navbar {
+                padding: 0 5%;
+            }
+
+            .logo {
+                font-size: 16px;
+            }
+
+            .nav-links {
+                gap: 12px;
+            }
+
+            .nav-links a {
+                font-size: 12px;
+            }
+
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
-<?php
-$student_id = isset($student_id) ? $student_id : '';
-$name = isset($name) ? $name : '';
-$course = isset($course) ? $course : '';
-$year = isset($year) ? $year : '';
-$section = isset($section) ? $section : '';
-$email = isset($email) ? $email : '';
-$contact = isset($contact) ? $contact : '';
-$address = isset($address) ? $address : '';
-$skills = isset($skills) ? $skills : '';
-$hobbies = isset($hobbies) ? $hobbies : '';
-$description = isset($description) ? $description : '';
-$facebook = isset($facebook) ? $facebook : '';
-$github = isset($github) ? $github : '';
-?>
 
-<div class="navbar">
-    <a href="<?= site_url('student'); ?>">Home</a>
-    <a href="<?= site_url('student/profile'); ?>">Student Profile</a>
-</div>
+<!-- =========================
+     NAVBAR
+========================= -->
 
-<div class="profile">
+<nav class="navbar">
 
-    <!-- Profile Header -->
-    <div class="header-card">
-        <div class="avatar">ZM</div>
-
-        <h1>Zean's Digital Student Profile</h1>
-
-        <div class="subtitle">
-            BS Information Technology Student
-        </div>
+    <div class="logo">
+        JLM / STUDENT
     </div>
 
-    <!-- Personal Information -->
-    <div class="card">
-        <h2>Personal Information</h2>
+    <div class="nav-links">
 
-        <div class="info">
-            <span class="label">Student ID</span>
-            <span class="value"><?= $student_id ?></span>
-        </div>
+        <a href="<?= site_url('student'); ?>">
+            HOME
+        </a>
 
-        <div class="info">
-            <span class="label">Student Name</span>
-            <span class="value"><?= $name ?></span>
-        </div>
+        <a href="<?= site_url('student/profile'); ?>">
+            PROFILE
+        </a>
 
-        <div class="info">
-            <span class="label">Course</span>
-            <span class="value"><?= $course ?></span>
-        </div>
-
-        <div class="info">
-            <span class="label">Year Level</span>
-            <span class="value"><?= $year ?></span>
-        </div>
-
-        <div class="info">
-            <span class="label">Section</span>
-            <span class="value"><?= $section ?></span>
-        </div>
-
-        <div class="info">
-            <span class="label">Email</span>
-            <span class="value"><?= $email ?></span>
-        </div>
-
-        <div class="info">
-            <span class="label">Contact Number</span>
-            <span class="value"><?= $contact ?></span>
-        </div>
-
-        <div class="info">
-            <span class="label">Address</span>
-            <span class="value"><?= $address ?></span>
-        </div>
     </div>
 
-    <!-- About Me -->
-    <div class="card">
-        <h2>About Me</h2>
+</nav>
 
-        <p class="about">
-            <?= $description ?>
-        </p>
 
-        <div class="info">
-            <span class="label">Skills</span>
-            <span class="value"><?= $skills ?></span>
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="container">
+
+
+    <!-- PROFILE HEADER -->
+
+    <section class="profile-header">
+
+        <div class="avatar">
+            JL
         </div>
 
-        <div class="info">
-            <span class="label">Hobbies</span>
-            <span class="value"><?= $hobbies ?></span>
-        </div>
-    </div>
+        <div>
 
-    <!-- Social Media -->
-    <div class="card">
-        <h2>Social Media</h2>
+            <div class="profile-label">
+                STUDENT PROFILE
+            </div>
 
-        <div class="social-links">
-
-            <a href="<?= $facebook ?>" target="_blank">
-                Facebook
-            </a>
-
-            <a href="<?= $github ?>" target="_blank">
-                GitHub
-            </a>
+            <h1>
+                <?= htmlspecialchars($name) ?>
+            </h1>
 
         </div>
-    </div>
 
-    <a class="back-button" href="<?= site_url('student'); ?>">
-        Back to Student Hub
+    </section>
+
+
+    <!-- INFORMATION -->
+
+    <section class="information">
+
+
+        <!-- ACADEMIC -->
+
+        <div class="section">
+
+            <h2>
+                ACADEMIC INFORMATION
+            </h2>
+
+
+            <div class="item">
+
+                <label>
+                    Student ID
+                </label>
+
+                <span>
+                    <?= htmlspecialchars($student_id) ?>
+                </span>
+
+            </div>
+
+
+            <div class="item">
+
+                <label>
+                    Course
+                </label>
+
+                <span>
+                    <?= htmlspecialchars($course) ?>
+                </span>
+
+            </div>
+
+
+            <div class="item">
+
+                <label>
+                    Year Level
+                </label>
+
+                <span>
+                    <?= htmlspecialchars($year) ?>
+                </span>
+
+            </div>
+
+
+            <div class="item">
+
+                <label>
+                    Section
+                </label>
+
+                <span>
+                    <?= htmlspecialchars($section) ?>
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- CONTACT -->
+
+        <div class="section">
+
+            <h2>
+                CONTACT INFORMATION
+            </h2>
+
+
+            <div class="item">
+
+                <label>
+                    Email
+                </label>
+
+                <span>
+                    <?= htmlspecialchars($email) ?>
+                </span>
+
+            </div>
+
+
+            <div class="item">
+
+                <label>
+                    Contact Number
+                </label>
+
+                <span>
+                    <?= htmlspecialchars($contact) ?>
+                </span>
+
+            </div>
+
+
+            <div class="item">
+
+                <label>
+                    Address
+                </label>
+
+                <span>
+                    <?= htmlspecialchars($address) ?>
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- ABOUT -->
+
+        <div class="section about">
+
+            <h2>
+                ABOUT ME
+            </h2>
+
+            <p>
+                <?= htmlspecialchars($description) ?>
+            </p>
+
+
+            <div class="item">
+
+                <label>
+                    Skills
+                </label>
+
+                <span class="tag">
+                    <?= htmlspecialchars($skills) ?>
+                </span>
+
+            </div>
+
+
+            <div class="item">
+
+                <label>
+                    Hobbies
+                </label>
+
+                <span class="tag">
+                    <?= htmlspecialchars($hobbies) ?>
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- SOCIAL -->
+
+        <?php if (!empty($facebook) || !empty($github)): ?>
+
+            <div class="social">
+
+                <?php if (!empty($facebook)): ?>
+
+                    <a
+                        href="<?= htmlspecialchars($facebook) ?>"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        FACEBOOK →
+                    </a>
+
+                <?php endif; ?>
+
+
+                <?php if (!empty($github)): ?>
+
+                    <a
+                        href="<?= htmlspecialchars($github) ?>"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        GITHUB →
+                    </a>
+
+                <?php endif; ?>
+
+            </div>
+
+        <?php endif; ?>
+
+
+    </section>
+
+
+    <!-- BACK -->
+
+    <a
+        href="<?= site_url('student'); ?>"
+        class="back"
+    >
+        ← BACK TO STUDENT HUB
     </a>
 
-</div>
+
+</main>
+
+
+<footer class="footer">
+
+    JLM Student Portal • 2026
+
+</footer>
+
 
 </body>
 </html>
