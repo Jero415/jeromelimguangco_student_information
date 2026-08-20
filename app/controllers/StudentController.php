@@ -44,7 +44,7 @@ class StudentController extends Controller
 
             $student = [
 
-                'student_id' => 'MCC2024-00200',
+                'student_id' => 'MCC2024-00181',
 
                 'name' => 'Jerome Limguangco',
 
@@ -54,21 +54,21 @@ class StudentController extends Controller
 
                 'section' => '3F4',
 
-                'email' => 'jerome@example.com',
+                'email' => 'jeromelimguangco324@gmail.com',
 
-                'contact' => '09565593762',
+                'contact' => '09981647322',
 
-                'address' => 'Philippines',
+                'address' => 'Masipit, Calapan city',
 
-                'skills' => 'Programming',
+                'skills' => 'Designing',
 
-                'hobbies' => 'Gaming, Drawing, Music',
+                'hobbies' => 'Online Games, Playing Basketball',
 
                 'description' =>
-                    'A BS Information Technology student interested in programming, technology, and learning new skills.',
+                    'A BS Information Technology student interested in learning new skills.',
 
                 'facebook' =>
-                    'https://www.facebook.com/',
+                    'https://www.facebook.com/share/1BPtrhr2u4/',
 
                 'github' =>
                     'https://github.com/'
