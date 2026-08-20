@@ -352,7 +352,7 @@
     <nav class="navbar">
 
         <div class="logo">
-            JLM / STUDENT
+            JL / STUDENT
         </div>
 
 
