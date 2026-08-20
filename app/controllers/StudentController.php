@@ -71,7 +71,7 @@ class StudentController extends Controller
                     'https://www.facebook.com/share/1BPtrhr2u4/',
 
                 'github' =>
-                    'https://github.com/'
+                    'https://github.com/Jero415'
 
             ];
 
