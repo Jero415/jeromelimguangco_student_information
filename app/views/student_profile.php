@@ -456,7 +456,7 @@ $github      = $github ?? '';
 <nav class="navbar">
 
     <div class="logo">
-        JLM / STUDENT
+        JL / STUDENT
     </div>
 
     <div class="nav-links">
