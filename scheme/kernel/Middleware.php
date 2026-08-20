@@ -1,7 +1,7 @@
 <?php
 /**
  * ------------------------------------------------------------------
- * LavaLust - an opensource lightweight PHP MVC Framework
+ * LavaLust - an opensource lightweight PHP MVC framework
  * ------------------------------------------------------------------
  *
  * MIT License
@@ -29,27 +29,12 @@
  * @package LavaLust
  * @author Ronald M. Marasigan <ronald.marasigan@yahoo.com>
  * @since Version 4
- * @link https://github.com/ronmarasigan/LavaLust
- * @license https://opensource.org/licenses/MIT MIT License
  */
 
-/**
-* ------------------------------------------------------
-*  Class Middleware
-* ------------------------------------------------------
- */
 class Middleware
 {
-    /**
-     * Map
-     *
-     * @var array
-     */
     protected $map = [];
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         $config = get_config();
@@ -63,16 +48,12 @@ class Middleware
 
     /**
      * Run the middleware pipeline
-     *
-     * @param array $middlewares
-     * @param Closure $destination
-     * @return mixed
      */
     public function run(array $middlewares, Closure $destination)
     {
         $pipeline = array_reduce(
             array_reverse($middlewares),
-            function ($next, $middleware) {
+            function (Closure $next, string $middleware): Closure {
                 return function () use ($middleware, $next) {
                     return $this->resolve($middleware, $next);
                 };
@@ -85,18 +66,35 @@ class Middleware
 
     /**
      * Resolve a middleware
-     *
-     * @param string $middleware
-     * @param Closure $next
-     * @return mixed
      */
-    protected function resolve($middleware, $next)
+    protected function resolve(string $middleware, Closure $next)
     {
         if (!isset($this->map[$middleware])) {
-            throw new Exception("Middleware [$middleware] not registered.");
+            throw new Exception(
+                "Middleware [$middleware] not registered."
+            );
         }
 
-        return $this->map[$middleware]->handle($next);
+        $class = $this->map[$middleware];
+
+        // Create the middleware object
+        if (is_string($class)) {
+            if (!class_exists($class)) {
+                throw new Exception(
+                    "Middleware class [$class] not found."
+                );
+            }
+
+            $class = new $class();
+        }
+
+        // Make sure it has a handle() method
+        if (!method_exists($class, 'handle')) {
+            throw new Exception(
+                "Middleware [$middleware] must have a handle() method."
+            );
+        }
+
+        return $class->handle($next);
     }
 }
-
