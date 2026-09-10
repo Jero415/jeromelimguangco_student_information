@@ -16,4 +16,11 @@ class UserModel extends Model {
     {
         parent::__construct();
     }
+
+    public function findByUsername($username)
+    {
+        return $this->db->table($this->table)
+            ->where('username', $username)
+            ->get();
+    }
 }

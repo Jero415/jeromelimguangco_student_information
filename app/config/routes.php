@@ -49,3 +49,11 @@ $router->get('/student/profile', 'StudentController::profile', [
 ]);
 $router->get('/', 'Welcome::index');
 $router->get('/users', 'UserController::index');
+$router->match('/login', 'LoginController::login', ['GET', 'POST']);
+$router->get('/logout', 'LoginController::logout');
+$router->group(['middleware' => ['auth']], function ($router) {
+    $router->get('/products', 'ProductController::index');
+    $router->match('/products/create', 'ProductController::create', ['GET', 'POST']);
+    $router->match('/products/edit/{id}', 'ProductController::edit', ['GET', 'POST']);
+    $router->get('/products/delete/{id}', 'ProductController::delete');
+});
