@@ -99,6 +99,21 @@
                 inset -3px -3px 7px rgba(255, 255, 255, 0.8);
         }
 
+        .test-account {
+            background: #d9efff;
+            border: 1px solid #b8ddf5;
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 20px;
+            color: #315873;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .test-account strong {
+            color: #173e60;
+        }
+
         .form-group {
             margin-bottom: 20px;
         }
@@ -222,6 +237,11 @@
                     <?= html_escape($error) ?>
                 </div>
             <?php endif; ?>
+
+            <div class="test-account">
+                Username: <strong>labadmin</strong><br>
+                Password: <strong>Lab@12345</strong>
+            </div>
 
             <form method="post" action="<?= site_url('login') ?>">
 
